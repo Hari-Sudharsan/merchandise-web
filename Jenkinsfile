@@ -3,8 +3,8 @@ pipeline {
     environment {
         IMAGE_NAME = 'merch-web:latest'
         DOCKER_PATH = 'C:\\Program Files\\Docker\\Docker\\resources\\bin'
-        // REPLACE 'YourUsername' with your actual Windows username
-        KUBE_CONFIG = 'C:\\Users\\YourUsername\\.kube\\config'
+        // REPLACE 'sudha' with your actual Windows username below
+        KUBE_CONFIG = 'C:\\Users\\sudha\\.kube\\config'
     }
     stages {
         stage('Build Docker Image') {
@@ -20,7 +20,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 echo 'Deploying to Kubernetes...'
-                // We use the --kubeconfig flag to point directly to your user folder
+                // Using the absolute path to your local kubeconfig
                 bat "\"${DOCKER_PATH}\\kubectl.exe\" apply -f k8s.yaml --kubeconfig=\"${KUBE_CONFIG}\""
                 
                 echo 'Refreshing deployment...'
