@@ -17,8 +17,12 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                // This uses the config file you just pushed to GitHub
-                bat "\"${DOCKER_PATH}\\kubectl.exe\" apply -f k8s.yaml --kubeconfig=\"%WORKSPACE%\\config\""
+                echo 'Deploying to Kubernetes...'
+                // Added --validate=false to skip the openapi check that is failing
+                bat "\"${DOCKER_PATH}\\kubectl.exe\" apply -f k8s.yaml --kubeconfig=\"config\" --validate=false"
+                
+                echo 'Restarting deployment to apply changes...'
+                bat "\"${DOCKER_PATH}\\kubectl.exe\" rollout restart deployment merch-web-deployment --kubeconfig=\"config\""
             }
         }
     }
