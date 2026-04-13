@@ -15,7 +15,7 @@ spec:
       containers:
       - name: merch-web-container
         image: merch-web:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
         ports:
         - containerPort: 80
 ---
@@ -30,4 +30,4 @@ spec:
   ports:
     - port: 80
       targetPort: 80
-      nodePort: 30080
+      nodePort: 30085
