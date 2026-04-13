@@ -2,25 +2,28 @@ pipeline {
     agent any
     environment {
         IMAGE_NAME = 'merch-web:latest'
+        // Point Jenkins directly to the Docker and Kubectl folder
+        DOCKER_PATH = 'C:\\Program Files\\Docker\\Docker\\resources\\bin'
     }
     stages {
         stage('Build Docker Image') {
             steps {
                 echo 'Building the Docker Image...'
-                bat "docker build -t ${IMAGE_NAME} ."
+                // Using the full path to call docker.exe
+                bat "\"${DOCKER_PATH}\\docker.exe\" build -t ${IMAGE_NAME} ."
             }
         }
         stage('Test') {
             steps {
                 echo 'Running tests to verify container contents...'
-                bat "docker run --rm ${IMAGE_NAME} ls -l /usr/share/nginx/html/index.html"
+                bat "\"${DOCKER_PATH}\\docker.exe\" run --rm ${IMAGE_NAME} ls -l /usr/share/nginx/html/index.html"
             }
         }
         stage('Deploy to Kubernetes') {
             steps {
                 echo 'Deploying application to local Kubernetes cluster...'
-                bat "kubectl apply -f k8s.yaml"
-                bat "kubectl rollout restart deployment merch-web-deployment"
+                // Using the full path to call kubectl.exe
+                bat "\"${DOCKER_PATH}\\kubectl.exe\" apply -f k8s.yaml"
             }
         }
     }
