@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Hari Sudharsan">
+    <title>TechGear | Premium Merchandise</title>
+    <style>
+        :root {
+            --primary-blue: #0056b3;
+            --light-blue: #f0f7ff;
+            --white: #ffffff;
+            --text-dark: #333333;
+            --text-muted: #666666;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-blue);
+            color: var(--text-dark);
+        }
+        header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        header h1 { margin: 0 0 10px 0; font-size: 2.5rem; letter-spacing: 1px; }
+        header p { margin: 0; font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto;}
+        
+        .container {
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .product-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            border-top: 4px solid var(--primary-blue);
+        }
+        .product-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 1.2rem;
+            border: 1px solid #e0e0e0;
+        }
+        .product-name { color: var(--primary-blue); font-size: 1.4rem; margin-bottom: 0.8rem; }
+        .product-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6; }
+        .product-price { font-size: 1.5rem; font-weight: bold; color: var(--text-dark); }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>TechGear Merchandise</h1>
+        <p>Equipping modern professionals with premium gadgets, comfortable apparel, and high-quality accessories designed for productivity.</p>
+    </header>
+
+    <div class="container">
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1616423640778-28d1b53229bd?auto=format&fit=crop&w=600&q=80" alt="Developer Desk Mat" class="product-image">
+                <h2 class="product-name">Developer Desk Mat</h2>
+                <p class="product-desc">Premium anti-slip leather desk pad providing a smooth, expansive surface for your mouse and mechanical keyboard.</p>
+                <div class="product-price">Rs.29.99</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80" alt="TechGear Hoodie" class="product-image">
+                <h2 class="product-name">TechGear Hoodie</h2>
+                <p class="product-desc">Ultra-soft, minimalist white hoodie with subtle blue embroidery. Perfect for late-night coding sessions or casual outings.</p>
+                <div class="product-price">Rs.45.00</div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80" alt="Noise-Canceling Earbuds" class="product-image">
+                <h2 class="product-name">Noise-Canceling Earbuds</h2>
+                <p class="product-desc">High-fidelity wireless audio with active noise cancellation, deep bass, and a compact charging case for all-day battery life.</p>
+                <div class="product-price">Rs.120.00</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 TechGear Merchandise | Designed by Hari Sudharsan
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merch-web-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: merch-web
+  template:
+    metadata:
+      labels:
+        app: merch-web
+    spec:
+      containers:
+      - name: merch-web-container
+        image: merch-web:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: merch-web-service
+spec:
+  type: NodePort
+  selector:
+    app: merch-web
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080
