@@ -19,12 +19,13 @@ pipeline {
                 bat "\"${DOCKER_PATH}\\docker.exe\" run --rm ${IMAGE_NAME} ls -l /usr/share/nginx/html/index.html"
             }
         }
-        stage('Deploy to Kubernetes') {
+               stage('Deploy to Kubernetes') {
             steps {
                 echo 'Deploying application to local Kubernetes cluster...'
-                // Using the full path to call kubectl.exe
-                bat "\"${DOCKER_PATH}\\kubectl.exe\" apply -f k8s.yaml"
+                // Added --kubeconfig=config to point to the local file you just pasted
+                bat "\"${DOCKER_PATH}\\kubectl.exe\" apply -f k8s.yaml --kubeconfig=config"
             }
         }
+
     }
 }
