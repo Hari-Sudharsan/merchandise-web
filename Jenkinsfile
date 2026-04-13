@@ -3,35 +3,29 @@ pipeline {
     environment {
         IMAGE_NAME = 'merch-web:latest'
         DOCKER_PATH = 'C:\\Program Files\\Docker\\Docker\\resources\\bin'
+        // REPLACE 'YourUsername' with your actual Windows username
+        KUBE_CONFIG = 'C:\\Users\\YourUsername\\.kube\\config'
     }
     stages {
         stage('Build Docker Image') {
             steps {
-                echo 'Building the Docker Image...'
                 bat "\"${DOCKER_PATH}\\docker.exe\" build -t ${IMAGE_NAME} ."
             }
         }
         stage('Test') {
             steps {
-                echo 'Verifying container contents...'
                 bat "\"${DOCKER_PATH}\\docker.exe\" run --rm ${IMAGE_NAME} ls -l /usr/share/nginx/html/index.html"
             }
         }
-               stage('Deploy to Kubernetes') {
+        stage('Deploy to Kubernetes') {
             steps {
-                echo 'Creating temporary config and deploying...'
-                // 1. Create the config file using the text you copied from Step 1
-                // PASTE YOUR COPIED TEXT INSIDE THE SINGLE QUOTES BELOW
-                bat '''
-                echo apiVersion: v1 > config
-                echo clusters: >> config
-                echo ... (PASTE THE REST OF YOUR TEXT HERE) ... >> config
-                '''
+                echo 'Deploying to Kubernetes...'
+                // We use the --kubeconfig flag to point directly to your user folder
+                bat "\"${DOCKER_PATH}\\kubectl.exe\" apply -f k8s.yaml --kubeconfig=\"${KUBE_CONFIG}\""
                 
-                // 2. Run the deployment using that temporary file
-                bat "\"${DOCKER_PATH}\\kubectl.exe\" apply -f k8s.yaml --kubeconfig=config"
+                echo 'Refreshing deployment...'
+                bat "\"${DOCKER_PATH}\\kubectl.exe\" rollout restart deployment merch-web-deployment --kubeconfig=\"${KUBE_CONFIG}\""
             }
         }
-
     }
 }
